@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Ace Gym</string>
+    <string name="see_your_plans">See Your Plans</string>
+    <string name="see_all_activities">See All Activities</string>
+    <string name="about_us">About us</string>
+    <string name="training_name">Training Name</string>
+    <string name="short_description">Short Description</string>
+</resources>
