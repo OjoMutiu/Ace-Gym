@@ -1,6 +1,9 @@
 package com.example.acegym;
 
-public class Training {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class Training implements Parcelable {
     private int id;
     private String name, shortDescription, longDescription, imgUrl;
 
@@ -11,6 +14,26 @@ public class Training {
         this.longDescription = longDescription;
         this.imgUrl = imgUrl;
     }
+
+    protected Training(Parcel in) {
+        id = in.readInt();
+        name = in.readString();
+        shortDescription = in.readString();
+        longDescription = in.readString();
+        imgUrl = in.readString();
+    }
+
+    public static final Creator<Training> CREATOR = new Creator<Training>() {
+        @Override
+        public Training createFromParcel(Parcel in) {
+            return new Training(in);
+        }
+
+        @Override
+        public Training[] newArray(int size) {
+            return new Training[size];
+        }
+    };
 
     public int getId() {
         return id;
@@ -61,5 +84,19 @@ public class Training {
                 ", longDescription='" + longDescription + '\'' +
                 ", imgUrl='" + imgUrl + '\'' +
                 '}';
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(id);
+        dest.writeString(name);
+        dest.writeString(shortDescription);
+        dest.writeString(longDescription);
+        dest.writeString(imgUrl);
     }
 }

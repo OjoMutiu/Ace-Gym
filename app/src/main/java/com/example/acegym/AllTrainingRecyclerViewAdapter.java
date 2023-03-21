@@ -1,6 +1,8 @@
 package com.example.acegym;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,6 +21,7 @@ import java.util.ArrayList;
 
 public class AllTrainingRecyclerViewAdapter extends RecyclerView.Adapter<AllTrainingRecyclerViewAdapter.ViewHolder> {
     private static final String TAG = "TrainingRecViewAdapter";
+    public static final String TRAINING_KEY = "training";
 
     private ArrayList<Training> training =  new ArrayList<>();
     private final Context context;
@@ -35,7 +38,7 @@ public class AllTrainingRecyclerViewAdapter extends RecyclerView.Adapter<AllTrai
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ViewHolder holder, @SuppressLint("RecyclerView") int position) {
         Log.d(TAG, "onBindViewHolder: called");
         holder.txtTrainingName.setText(training.get(position).getName());
         holder.txtShortDesc.setText(training.get(position).getShortDescription());
@@ -48,8 +51,9 @@ public class AllTrainingRecyclerViewAdapter extends RecyclerView.Adapter<AllTrai
         holder.parent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(context, holder.txtTrainingName.getText() + " is selected", Toast.LENGTH_SHORT).show();
-                //TODO navigate the user to the Training activity
+                Intent intent = new Intent(context, TrainingActivity.class);
+                intent.putExtra(TRAINING_KEY, training.get(position));
+                context.startActivity(intent);
             }
         });
     }

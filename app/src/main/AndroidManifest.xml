@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AceGym">
         <activity
+            android:name=".TrainingActivity"
+            android:exported="true" />
+        <activity
             android:name=".AllTrainingActivity"
             android:exported="true" />
         <activity
