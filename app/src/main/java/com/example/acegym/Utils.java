@@ -29,12 +29,12 @@ public class Utils {
 
         Training legPress = new Training(3, "Leg Press", "The leg press is a weight training exercise in which the individual pushes a weight or resistance away from them using their legs.",
                 "The leg press is a weight training exercise in which the individual pushes a weight or resistance away from them using their legs. The term leg press also refers to the apparatus used to perform this exercise. The leg press can be used to evaluate an athlete's overall lower body strength (from knee joint to hip).",
-                "https://www.fitnessfactoryoutlet.com/images/products/14392.png");
+                "https://fitnessvolt.com/wp-content/uploads/2022/05/Leg-Press-Foot-Placements.jpg");
         training.add(legPress);
 
         Training pectorals = new Training(4, "Pectorals", "Amazing for building chest muscles",
                 "Your pectoral muscles are one of the largest muscle groups in your upper body. They pull on the humerus (upper arm bone), allowing you to make vertical, horizontal, and rotational movements with your arms. You use these muscles all day, every day, so it's important to keep them strong.",
-                "https://www.korrukmag.com/wp-content/uploads/2019/11/2756-serious-man-training-upper-body-using-fly-machine-1060869384-0effce7eff3044289055fcd16a9c6788.jpg");
+                "https://www.bodybuilding.com/images/2016/july/build-your-best-chest-5-must-do-pec-exercises-header-v2-960x540.jpg");
         training.add(pectorals);
 
         Training pullUps = new Training(5, "Pull-ups", "An exercise involving raising oneself with one's arms by pulling up against a horizontal bar fixed above one's head.",
