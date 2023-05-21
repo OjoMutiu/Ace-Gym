@@ -7,6 +7,7 @@ public class Utils {
     private static Utils instance;
 
     private ArrayList<Training> training;
+    private static ArrayList<Plan> plans;
 
     public Utils() {
         if(training == null){
@@ -52,5 +53,12 @@ public class Utils {
 
     public ArrayList<Training> getTraining() {
         return training;
+    }
+
+    public static boolean addPlan(Plan plan){
+        if(null == plans){
+            plans = new ArrayList<Plan>();
+        }
+        return plans.add(plan);
     }
 }

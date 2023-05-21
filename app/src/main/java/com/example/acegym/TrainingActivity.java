@@ -3,11 +3,10 @@ package com.example.acegym;
 import static com.example.acegym.AllTrainingRecyclerViewAdapter.TRAINING_KEY;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.widget.NestedScrollView;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -15,12 +14,12 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 
-public class TrainingActivity extends AppCompatActivity {
-
+public class TrainingActivity extends AppCompatActivity implements PlanDetailDialog.PassPlanInterface {
+    private static final String TAG = "Training Started";
     private Button btnAddToPlan;
     private TextView txtTrainingName, txtLongDesc;
     private ImageView imgTrainingImg;
-    private NestedScrollView nestedScrollView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,22 +40,35 @@ public class TrainingActivity extends AppCompatActivity {
                         .load(training.getImgUrl())
                         .into(imgTrainingImg);
 
-                btnAddToPlan.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        //TODO: Display Add to plan dialogue box
-                        Toast.makeText(TrainingActivity.this, "Add to plan selected", Toast.LENGTH_SHORT).show();
-                    }
+                btnAddToPlan.setOnClickListener(v -> {
+                    PlanDetailDialog detailDialog = new PlanDetailDialog();
+                    Bundle bundle = new Bundle();
+                    bundle.putParcelable(TRAINING_KEY, training);
+                    detailDialog.setArguments(bundle);
+                    detailDialog.show(getSupportFragmentManager(), "plan detail dialog");
                 });
             }
         }
     }
 
     public void initView() {
-        nestedScrollView = findViewById(R.id.nestedScrollView);
+        //NestedScrollView nestedScrollView = findViewById(R.id.nestedScrollView);
         btnAddToPlan = findViewById(R.id.btnAddToPlan);
         txtTrainingName = findViewById(R.id.txtTrainingName);
         txtLongDesc = findViewById(R.id.txtLongDesc);
         imgTrainingImg = findViewById(R.id.imgTrainingImg);
+    }
+
+    @Override
+    public void getPlan(Plan plan) {
+        if(Utils.addPlan(plan)){
+            Log.d(TAG, "getPlan: started");
+            Toast.makeText(this, "Plan added successfully", Toast.LENGTH_SHORT).show();
+
+            Intent intent = new Intent(this, PlanActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
+
+        }
     }
 }

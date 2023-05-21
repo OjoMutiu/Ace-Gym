@@ -9,7 +9,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -48,13 +47,10 @@ public class AllTrainingRecyclerViewAdapter extends RecyclerView.Adapter<AllTrai
                 .load(training.get(position).getImgUrl())
                 .into(holder.imgTraining);
 
-        holder.parent.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(context, TrainingActivity.class);
-                intent.putExtra(TRAINING_KEY, training.get(position));
-                context.startActivity(intent);
-            }
+        holder.parent.setOnClickListener(v -> {
+            Intent intent = new Intent(context, TrainingActivity.class);
+            intent.putExtra(TRAINING_KEY, training.get(position));
+            context.startActivity(intent);
         });
     }
 
@@ -69,7 +65,7 @@ public class AllTrainingRecyclerViewAdapter extends RecyclerView.Adapter<AllTrai
     }
 
 
-    public class ViewHolder extends RecyclerView.ViewHolder{
+    public static class ViewHolder extends RecyclerView.ViewHolder{
 
         private final MaterialCardView parent;
         private final TextView txtTrainingName;
